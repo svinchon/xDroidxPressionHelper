@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://helperserver.xpression.diy.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://helperserver.xpression.diy.com" xmlns:intf="http://helperserver.xpression.diy.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://helperserver.xpression.diy.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="publishDocumentWithImages">
+    <complexType>
+     <sequence>
+      <element name="requestContext" type="xsd:string"/>
+      <element name="documentName" type="xsd:string"/>
+      <element name="customerData" type="xsd:string"/>
+      <element name="outputProfileName" type="xsd:string"/>
+      <element name="resourcesZIP" type="xsd:base64Binary"/>
+      <element maxOccurs="unbounded" name="imageMetadata" type="impl:ImageMetadata"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ImageMetadata">
+    <sequence>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="format" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="publishDocumentWithImagesResponse">
+    <complexType>
+     <sequence>
+      <element name="publishDocumentWithImagesReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="publishDocumentWithImagesResponse">
+
+      <wsdl:part element="impl:publishDocumentWithImagesResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="publishDocumentWithImagesRequest">
+
+      <wsdl:part element="impl:publishDocumentWithImages" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="QuickDocPlus">
+
+      <wsdl:operation name="publishDocumentWithImages">
+
+         <wsdl:input message="impl:publishDocumentWithImagesRequest" name="publishDocumentWithImagesRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:publishDocumentWithImagesResponse" name="publishDocumentWithImagesResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="QuickDocPlusSoapBinding" type="impl:QuickDocPlus">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="publishDocumentWithImages">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="publishDocumentWithImagesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="publishDocumentWithImagesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="QuickDocPlusService">
+
+      <wsdl:port binding="impl:QuickDocPlusSoapBinding" name="QuickDocPlus">
+
+         <wsdlsoap:address location="http://localhost:18080/xHelperServer/services/QuickDocPlus"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

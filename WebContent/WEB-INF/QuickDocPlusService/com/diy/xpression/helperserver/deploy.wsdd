@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from QuickDocPlusService WSDL service -->
+
+  <service name="QuickDocPlus" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://helperserver.xpression.diy.com"/>
+      <parameter name="wsdlServiceElement" value="QuickDocPlusService"/>
+      <parameter name="schemaQualified" value="http://helperserver.xpression.diy.com"/>
+      <parameter name="wsdlServicePort" value="QuickDocPlus"/>
+      <parameter name="className" value="com.diy.xpression.helperserver.QuickDocPlus"/>
+      <parameter name="wsdlPortType" value="QuickDocPlus"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://helperserver.xpression.diy.com" xmlns:retNS="http://helperserver.xpression.diy.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="publishDocumentWithImages" qname="operNS:publishDocumentWithImages" returnQName="retNS:publishDocumentWithImagesReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://helperserver.xpression.diy.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:requestContext" type="tns:string"/>
+        <parameter xmlns:pns="http://helperserver.xpression.diy.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:documentName" type="tns:string"/>
+        <parameter xmlns:pns="http://helperserver.xpression.diy.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:customerData" type="tns:string"/>
+        <parameter xmlns:pns="http://helperserver.xpression.diy.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:outputProfileName" type="tns:string"/>
+        <parameter xmlns:pns="http://helperserver.xpression.diy.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:resourcesZIP" type="tns:base64Binary"/>
+        <parameter xmlns:pns="http://helperserver.xpression.diy.com" xmlns:tns="http://helperserver.xpression.diy.com" qname="pns:imageMetadata" type="tns:ImageMetadata"/>
+      </operation>
+      <parameter name="allowedMethods" value="publishDocumentWithImages"/>
+
+      <typeMapping xmlns:ns="http://helperserver.xpression.diy.com" qname="ns:ImageMetadata" type="java:com.diy.xpression.helperserver.ImageMetadata" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>

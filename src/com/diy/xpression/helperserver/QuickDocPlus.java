@@ -16,10 +16,13 @@ public class QuickDocPlus {
 			byte[] resourcesZIP, 
 			ImageMetadata[] imageMetadata
 	) {
-		String returnMessage = "zzz";
+		String returnMessage = null;
 		try {
 			// write zip to temp
 			Utils.convertByte2File(resourcesZIP, "c:/temp/fromCaptiva.zip");
+			
+			// write data to temp
+			Utils.convertByte2File(customerData.getBytes(), "c:/temp/fromCaptiva/fromCaptiva.xml");
 			
 			// unzip
 			ZipFile zipFile = new ZipFile("c:/temp/fromCaptiva.zip");
@@ -57,6 +60,7 @@ public class QuickDocPlus {
 					customerData,
 					outputProfileName
 			);
+			Utils.log(returnMessage);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (ZipException e) {
